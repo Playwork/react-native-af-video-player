@@ -243,7 +243,7 @@ class Video extends Component {
           const height = orientation !== initialOrient ?
             Win.width : Win.height
             this.props.onFullScreen(this.state.fullScreen)
-            if (this.props.rotateToFullScreen) Orientation.lockToLandscape()
+            if (this.props.lockToPortrait) Orientation.lockToPortrait()
             this.animToFullscreen(height)
         } else {
           if (this.props.fullScreenOnly) {
@@ -457,6 +457,7 @@ Video.propTypes = {
   playWhenInactive: PropTypes.bool,
   rotateToFullScreen: PropTypes.bool,
   lockPortraitOnFsExit: PropTypes.bool,
+  lockToPortrait: PropTypes.bool,
   onEnd: PropTypes.func,
   onLoad: PropTypes.func,
   onPlay: PropTypes.func,
@@ -486,6 +487,7 @@ Video.defaultProps = {
   playWhenInactive: false,
   rotateToFullScreen: false,
   lockPortraitOnFsExit: false,
+  lockToPortrait: false,
   onEnd: () => {},
   onLoad: () => {},
   onPlay: () => {},
