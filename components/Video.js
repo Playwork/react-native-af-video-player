@@ -92,13 +92,11 @@ class Video extends Component {
     const { height, width } = data.naturalSize   
     const ratio = height === 'undefined' && width === 'undefined' ?
       (9 / 16) : (height / width)
-    const inlineHeight = this.props.lockRatio ?
-      (Win.width / this.props.lockRatio)
-      : (Win.width * ratio)
+    const inlineHeight = this.props.inlineHeight 
     this.setState({
       paused: !this.props.autoPlay,
       loading: false,
-      inlineHeight,
+      inlineHeight : inlineHeight ? inlineHeight : this.state.inlineHeight,
       duration: data.duration
     }, () => {
       Animated.timing(this.animInline, { toValue: inlineHeight, duration: 200 }).start()
@@ -471,7 +469,8 @@ Video.propTypes = {
   logo: PropTypes.string,
   title: PropTypes.string,
   theme: PropTypes.object,
-  resizeMode: PropTypes.string
+  resizeMode: PropTypes.string,
+  inlineHeight: PropTypes.number
 }
 
 Video.defaultProps = {
@@ -500,7 +499,8 @@ Video.defaultProps = {
   logo: undefined,
   title: '',
   theme: defaultTheme,
-  resizeMode: 'contain'
+  resizeMode: 'contain',
+  inlineHeight: undefined
 }
 
 export default Video
